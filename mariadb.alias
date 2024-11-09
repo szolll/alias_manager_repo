@@ -1,0 +1,64 @@
+# MariaDB Service Management
+alias mdbstart='sudo systemctl start mariadb'                   # Start MariaDB service
+alias mdbstop='sudo systemctl stop mariadb'                     # Stop MariaDB service
+alias mdbrestart='sudo systemctl restart mariadb'               # Restart MariaDB service
+alias mdbstatus='sudo systemctl status mariadb'                 # Check MariaDB service status
+
+# Login and Basic Commands
+alias mlogin='sudo mysql -u root -p'                            # Login to MariaDB as root
+alias mquery='mysql -u root -p -e'                              # Run a single query
+alias mdbshowdbs='mysql -u root -p -e "SHOW DATABASES;"'        # Show all databases
+alias mdbshowusers='mysql -u root -p -e "SELECT User, Host FROM mysql.user;"' # List all users
+
+# Database and Table Management
+alias mdbcreatedb='mysql -u root -p -e "CREATE DATABASE \\"<dbname>\\";"' # Create a new database
+alias mdbdropdb='mysql -u root -p -e "DROP DATABASE \\"<dbname>\\";"'     # Drop a database
+alias mdbcreatetb='mysql -u root -p -e "CREATE TABLE \\"<dbname>\\".<table> (<schema>);" # Create a new table in specific DB
+alias mdbdroptb='mysql -u root -p -e "DROP TABLE \\"<dbname>\\".<table>;"' # Drop a table from specific DB
+
+# User Management
+alias mdbadduser='mysql -u root -p -e "CREATE USER \'<user>\'@\'<host>\' IDENTIFIED BY \'<password>\';"' # Add a new user
+alias mdbdeluser='mysql -u root -p -e "DROP USER \'<user>\'@\'<host>\';"' # Delete a user
+alias mdbgrant='mysql -u root -p -e "GRANT ALL PRIVILEGES ON <db>.* TO \'<user>\'@\'<host>\';"' # Grant privileges to a user
+alias mdbrevoke='mysql -u root -p -e "REVOKE ALL PRIVILEGES, GRANT OPTION FROM \'<user>\'@\'<host>\';"' # Revoke user privileges
+alias mdbflush='mysql -u root -p -e "FLUSH PRIVILEGES;"'       # Reload privileges
+
+# Database Backup and Restore
+alias mdbdump='mysqldump -u root -p <dbname> > <backup.sql>'    # Dump a specific database to a file
+alias mdbdumpall='mysqldump -u root -p --all-databases > <backup.sql>' # Dump all databases to a file
+alias mdbrestore='mysql -u root -p <dbname> < <backup.sql>'     # Restore a database from dump file
+
+# Performance and Monitoring
+alias mdbstatusquery='mysqladmin -u root -p status'             # Show MariaDB status
+alias mdbprocs='mysqladmin -u root -p processlist'              # Show active process list
+alias mdbvars='mysqladmin -u root -p variables'                 # Show system variables for tuning
+alias mdbinnodb='mysql -u root -p -e "SHOW ENGINE INNODB STATUS\G"' # Show InnoDB status for monitoring
+
+# Logs and Error Monitoring
+alias mdblog='sudo tail -f /var/log/mysql/error.log'            # Tail MariaDB error log
+alias mdbslowlog='sudo tail -f /var/log/mysql/mariadb-slow.log' # Tail MariaDB slow query log
+
+# Security and Configuration
+alias mdbsecure='sudo mysql_secure_installation'                # Run MariaDB secure installation
+alias mdbconfig='sudo nano /etc/my.cnf'                         # Edit MariaDB configuration file
+alias mdbflushhosts='mysqladmin -u root -p flush-hosts'         # Flush host cache
+alias mdbflushlogs='mysqladmin -u root -p flush-logs'           # Flush logs to free up disk space
+
+# Maintenance and Cleanup
+alias mdboptimize='mysqlcheck -u root -p --optimize --all-databases' # Optimize all tables
+alias mdbrepair='mysqlcheck -u root -p --repair --all-databases'     # Repair tables in all databases
+alias mdbanalyze='mysqlcheck -u root -p --analyze --all-databases'   # Analyze tables in all databases
+
+# Replication Management (For Master-Slave Setup)
+alias mdbslaveon='mysql -u root -p -e "START SLAVE;"'              # Start replication on slave
+alias mdbslaveoff='mysql -u root -p -e "STOP SLAVE;"'              # Stop replication on slave
+alias mdbslavestatus='mysql -u root -p -e "SHOW SLAVE STATUS\G"'   # Show replication status on slave
+
+# Granting Remote Access
+alias mdbgrantremote='mysql -u root -p -e "GRANT ALL PRIVILEGES ON *.* TO \'<user>\'@\'<remote_host>\' IDENTIFIED BY \'<password>\' WITH GRANT OPTION;"' # Grant remote access to a user
+alias mdbenableremote='mysql -u root -p -e "UPDATE mysql.user SET Host = \'%\' WHERE User = \'<user>\'; FLUSH PRIVILEGES;"' # Enable remote access for a specific user
+
+# Help and Documentation
+alias mdbhelp='man mysql'                                      # Show MariaDB manual
+alias mdbdoc='xdg-open https://mariadb.com/kb/en/documentation/' # Open MariaDB documentation online
+alias mdbtut='xdg-open https://www.digitalocean.com/community/tutorials/how-to-install-mariadb' # MariaDB tutorial
