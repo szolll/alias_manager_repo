@@ -1,0 +1,80 @@
+# Docker Service Management
+alias dstart='sudo systemctl start docker'                  # Start Docker service
+alias dstop='sudo systemctl stop docker'                    # Stop Docker service
+alias drestart='sudo systemctl restart docker'              # Restart Docker service
+alias dstatus='sudo systemctl status docker'                # Check Docker service status
+
+# Docker Container Management
+alias dps='docker ps'                                       # List running containers
+alias dpsa='docker ps -a'                                   # List all containers
+alias drun='docker run -it'                                 # Run a new container interactively
+alias dstartc='docker start'                                # Start a stopped container
+alias dstopc='docker stop'                                  # Stop a running container
+alias drestartc='docker restart'                            # Restart a container
+alias drm='docker rm'                                       # Remove a stopped container
+alias drmf='docker rm -f'                                   # Force remove a running container
+
+# Docker Image Management
+alias dimgs='docker images'                                 # List all images
+alias dpull='docker pull'                                   # Pull an image from a registry
+alias dbuild='docker build -t'                              # Build an image from a Dockerfile
+alias drmi='docker rmi'                                     # Remove an image
+alias dimagesprune='docker image prune -f'                  # Remove unused images
+alias dbuildc='docker-compose build'                        # Build images with Docker Compose
+
+# Docker Network Management
+alias dnetls='docker network ls'                            # List all networks
+alias dnetcreate='docker network create'                    # Create a new network
+alias dnetrm='docker network rm'                            # Remove a network
+alias dnetinspect='docker network inspect'                  # Inspect a network
+
+# Docker Volume Management
+alias dvols='docker volume ls'                              # List all volumes
+alias dvolcreate='docker volume create'                     # Create a new volume
+alias dvolrm='docker volume rm'                             # Remove a volume
+alias dvolinspect='docker volume inspect'                   # Inspect a volume
+alias dvolprune='docker volume prune -f'                    # Remove all unused volumes
+
+# Docker Compose Management
+alias dcu='docker-compose up'                               # Start services with Docker Compose
+alias dcub='docker-compose up --build'                      # Build and start services
+alias dcd='docker-compose down'                             # Stop and remove containers, networks
+alias dclogs='docker-compose logs'                          # View logs for Docker Compose services
+alias dcrestart='docker-compose restart'                    # Restart all services in Docker Compose
+alias dcps='docker-compose ps'                              # List all services in Docker Compose
+
+# Container and Image Inspection
+alias dinspect='docker inspect'                             # Inspect a container or image
+alias dtop='docker top'                                     # Display running processes in a container
+alias dstats='docker stats --all'                           # Display resource usage statistics
+alias dlogs='docker logs'                                   # View logs of a container
+
+# Container and Image Cleanup
+alias dprune='docker system prune -f'                       # Remove unused containers, networks, images
+alias drmall='docker rm $(docker ps -aq)'                   # Remove all stopped containers
+alias drmiunused='docker rmi $(docker images -f "dangling=true" -q)' # Remove all dangling images
+alias dcleandangling='docker image prune --filter "dangling=true"'   # Clean up dangling images
+
+# Exporting and Importing Images
+alias dsave='docker save -o'                                # Save an image to a file
+alias dload='docker load -i'                                # Load an image from a file
+alias dexport='docker export -o'                            # Export a container’s filesystem to a tar file
+alias dimport='docker import'                               # Import an image or container from a tar file
+
+# Docker Tagging and Pushing
+alias dtag='docker tag'                                     # Tag an image with a new name
+alias dpush='docker push'                                   # Push an image to a registry
+
+# Miscellaneous Commands
+alias dexec='docker exec -it'                               # Execute a command in a running container
+alias dattach='docker attach'                               # Attach to a running container
+alias dcommit='docker commit'                               # Save a container as a new image
+alias drename='docker rename'                               # Rename a container
+alias dpause='docker pause'                                 # Pause all processes in a container
+alias dunpause='docker unpause'                             # Unpause all processes in a container
+
+# Docker Help and Documentation
+alias dhelp='docker --help'                                 # Show Docker help
+alias dman='man docker'                                     # Show Docker manual
+alias dcomposehelp='docker-compose --help'                  # Show Docker Compose help
+alias dref='xdg-open https://docs.docker.com/'              # Open Docker documentation in browser
