@@ -1,0 +1,36 @@
+# OpenVPN Service Management
+alias ovpnstart='sudo systemctl start openvpn@'           # Start OpenVPN service
+alias ovpnstop='sudo systemctl stop openvpn@'             # Stop OpenVPN service
+alias ovpnrestart='sudo systemctl restart openvpn@'       # Restart OpenVPN service
+alias ovpnstatus='sudo systemctl status openvpn@'         # Check OpenVPN service status
+
+# Client and Server Configuration
+alias ovpnlog='sudo tail -f /var/log/openvpn.log'         # Tail OpenVPN log for debugging
+alias ovpnclients='sudo cat /etc/openvpn/ipp.txt'         # List connected clients and their IPs
+alias ovpnconfig='sudo nano /etc/openvpn/server.conf'     # Edit OpenVPN server config
+alias ovpnreload='sudo systemctl reload openvpn@'         # Reload OpenVPN service
+alias ovpncheck='sudo openvpn --config /etc/openvpn/server.conf --test' # Test config
+
+# Certificate and Key Management
+alias ovpngenkey='sudo openvpn --genkey --secret'         # Generate a new static key
+alias ovpnrevoke='sudo ./easyrsa revoke'                  # Revoke a client certificate
+alias ovpncrl='sudo ./easyrsa gen-crl'                    # Generate a certificate revocation list
+alias ovpnaddclient='sudo ./easyrsa build-client-full'    # Generate a new client certificate
+
+# Client Configuration Management
+alias ovpnclient='sudo nano /etc/openvpn/client.ovpn'     # Edit client configuration file
+alias ovpndownload='scp user@host:/etc/openvpn/client.ovpn .' # Download client config from server
+alias ovpnadd='sudo cp /etc/openvpn/client.ovpn /path/to/clients/' # Copy client config to clients dir
+
+# IPTables Rules for OpenVPN (If needed)
+alias ovpniptables='sudo iptables -A FORWARD -i tun0 -o eth0 -j ACCEPT' # Allow forwarding
+alias ovpnmasq='sudo iptables -t nat -A POSTROUTING -s 10.8.0.0/24 -o eth0 -j MASQUERADE' # Masquerading
+
+# VPN Connection Monitoring
+alias ovpniplist='sudo cat /etc/openvpn/ipp.txt'         # List assigned IPs for clients
+alias ovpnconnlist='sudo cat /etc/openvpn/status.log'    # Show OpenVPN connection details
+alias ovpnkill='sudo killall -9 openvpn'                 # Force stop OpenVPN instances
+
+# Help and Documentation
+alias ovpnhelp='man openvpn'                             # Show OpenVPN manual
+alias ovpntut='xdg-open https://openvpn.net/community-resources/how-to/' # OpenVPN tutorial page
