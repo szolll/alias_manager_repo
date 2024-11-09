@@ -1,0 +1,94 @@
+# Basic Checkmk Site Commands
+alias cmkver='omd version'                                # Show Checkmk version
+alias cmksites='omd sites'                                # List all Checkmk sites
+alias cmkstatus='omd status'                              # Show status of services in a site
+alias cmkstart='omd start'                                # Start Checkmk site services
+alias cmkstop='omd stop'                                  # Stop Checkmk site services
+alias cmkrestart='omd restart'                            # Restart Checkmk site services
+alias cmkbackup='sudo omd backup'                         # Backup a Checkmk site
+alias cmkrestore='sudo omd restore'                       # Restore a Checkmk site from backup
+alias cmkclone='sudo omd cp'                              # Clone an existing Checkmk site
+alias cmkdeletesite='sudo omd rm'                         # Delete an existing site
+
+# Site Configuration Management
+alias cmkactivate='cmk -R'                                # Activate all pending changes
+alias cmkreload='cmk -O'                                  # Reload Checkmk configuration
+alias cmkapply='cmk -U'                                   # Apply changes to monitoring core
+alias cmkedit='omd config'                                # Edit Checkmk site configuration interactively
+alias cmkmodlog='tail -f /omd/sites/<site>/var/log/web.log' # Follow web log for config changes
+
+# Host and Service Monitoring
+alias cmkconf='cmk -I'                                    # Run inventory check on all hosts
+alias cmkcheck='cmk -nvp'                                 # Run a quick check on all services
+alias cmkaddhost='cmk -d'                                 # Add a new host to monitoring
+alias cmkupdate='cmk -II'                                 # Update inventory for all hosts
+alias cmkrecheck='cmk -C'                                 # Recheck all Checkmk configurations
+alias cmkdiscovery='cmk --detect-plugins'                 # Detect and enable plugins on a host
+
+# Detailed Host and Service Info
+alias cmkhoststatus='cmk -L'                              # List all monitored hosts
+alias cmkservicestatus='cmk -D'                           # Show details of monitored services
+alias cmkhostdetails='cmk -D <hostname>'                  # Detailed information for a specific host
+alias cmkservicedetails='cmk -S <service>'                # Show service details for a specific host
+alias cmkhostgroup='cmk -G'                               # List all host groups
+alias cmkservicegroup='cmk -G services'                   # List all service groups
+
+# Problematic Hosts and Services
+alias cmkproblemhosts='cmk --show-problem-hosts'          # Show hosts with issues
+alias cmkproblemservices='cmk --show-problem-services'    # Show services with issues
+alias cmksilence='cmk --set-service-state'                # Silence specific host/service alerts
+alias cmksilencedel='cmk --remove-silence'                # Remove silence from host/service alerts
+
+# Alerts and Notifications
+alias cmkalrtenable='cmk --enable-notifications'          # Enable notifications globally
+alias cmkalrtdisable='cmk --disable-notifications'        # Disable notifications globally
+alias cmktestalert='cmk --notify'                         # Send a test alert notification
+
+# User and Role Management
+alias cmkadduser='htpasswd -b /omd/sites/<site>/etc/htpasswd' # Add a Checkmk user
+alias cmkdeluser='htpasswd -D /omd/sites/<site>/etc/htpasswd' # Remove a Checkmk user
+alias cmkmoduser='htpasswd -b /omd/sites/<site>/etc/htpasswd' # Modify an existing user’s password
+alias cmkrolelist='cmk --list-roles'                     # List all roles available
+alias cmkroleadd='cmk --add-role'                        # Add a new role to a user
+
+# Checkmk Agent Management
+alias cmkagentinstall='curl -O http://<checkmk-server>/<site>/check_mk/agents/check_mk_agent.deb && sudo dpkg -i check_mk_agent.deb' # Install agent on Debian-based systems
+alias cmkagentconfig='sudo nano /etc/check_mk/check_mk.cfg'  # Edit Checkmk agent configuration
+alias cmkagentstatus='sudo systemctl status check-mk-agent'  # Check status of Checkmk agent
+alias cmkagentrestart='sudo systemctl restart check-mk-agent' # Restart Checkmk agent
+alias cmkagentreload='sudo systemctl reload check-mk-agent'   # Reload Checkmk agent configuration
+
+# Plugin and Extension Management
+alias cmkpluglist='ls /opt/omd/versions/default/share/check_mk/agents/plugins/' # List available agent plugins
+alias cmkpluginstall='cp /path/to/plugin /usr/lib/check_mk_agent/plugins/'      # Install a new plugin for the agent
+alias cmkplugstatus='cmk -P list'                        # List installed Checkmk extensions
+alias cmkpluginstallpkg='cmk -P install'                 # Install a Checkmk extension package
+alias cmkpluguninstallpkg='cmk -P remove'                # Remove an installed Checkmk extension
+
+# Performance and Monitoring
+alias cmkperf='cmk -vv'                                  # Verbose performance data for hosts/services
+alias cmkcleancache='cmk -P clear-cache'                 # Clear cache for extensions and plugins
+alias cmklogrotate='sudo omd logrotate'                  # Rotate logs for Checkmk
+alias cmktune='cmk --analyze-config'                     # Analyze and tune Checkmk configuration
+
+# Troubleshooting and Logs
+alias cmklogs='tail -f /omd/sites/<site>/var/log/nagios.log' # Follow Nagios core log (if using Nagios)
+alias cmkeventlog='tail -f /omd/sites/<site>/var/log/cmk.log' # Follow main Checkmk log
+alias cmkerrorlog='tail -f /omd/sites/<site>/var/log/web.log' # Check for web-related errors
+alias cmkchecklog='tail -f /omd/sites/<site>/var/check_mk/logwatch/<hostname>.log' # Logwatch logs per host
+
+# API and Automation
+alias cmkapi='curl -u <username>:<password> -X POST'      # Base command for Checkmk API calls
+alias cmkhostapi='curl -u <username>:<password> -X GET "<server>/check_mk/api/1.0/domain-types/host_config/collections/all"' # List hosts using API
+alias cmkserviceapi='curl -u <username>:<password> -X GET "<server>/check_mk/api/1.0/domain-types/service_config/collections/all"' # List services using API
+
+# Advanced Configuration
+alias cmkcustomcheck='cmk -P add-check'                  # Add a custom check script
+alias cmkcustomtag='cmk -P add-tag'                      # Add a custom tag to hosts/services
+alias cmkspecialagent='cmk -P add-special-agent'         # Add a special agent for monitoring
+
+# Help and Documentation
+alias cmkhelp='cmk --help'                               # Display Checkmk help
+alias cmkman='man cmk'                                   # Show Checkmk manual
+alias cmkdoc='xdg-open https://docs.checkmk.com/latest/en/' # Open Checkmk documentation
+alias cmkforum='xdg-open https://forum.checkmk.com/'     # Open Checkmk user forum
