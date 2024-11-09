@@ -1,0 +1,74 @@
+# Basic KVM Commands
+alias kvmls='virsh list --all'                            # List all virtual machines
+alias kvmstart='virsh start'                              # Start a VM
+alias kvmstop='virsh shutdown'                            # Gracefully stop a VM
+alias kvmreboot='virsh reboot'                            # Reboot a VM
+alias kvmforceoff='virsh destroy'                         # Force stop a VM (use with caution)
+alias kvminfo='virsh dominfo'                             # Show detailed info about a VM
+alias kvmxml='virsh dumpxml'                              # View the XML configuration of a VM
+
+# VM Creation and Cloning
+alias kvmcreate='virt-install'                            # Create a new VM with virt-install
+alias kvmclone='virt-clone'                               # Clone an existing VM
+alias kvmtemplate='virt-sysprep -d'                       # Prepare VM for template use
+
+# Snapshots and Checkpoints
+alias kvmsnap='virsh snapshot-create-as'                  # Take a snapshot of a VM
+alias kvmsnapls='virsh snapshot-list'                     # List all snapshots of a VM
+alias kvmsnapdel='virsh snapshot-delete'                  # Delete a snapshot of a VM
+alias kvmrestore='virsh snapshot-revert'                  # Restore a VM to a snapshot
+
+# Resource Allocation and Tuning
+alias kvmcpu='virsh setvcpus'                             # Set the number of CPUs for a VM
+alias kvmmem='virsh setmaxmem'                            # Set the maximum memory for a VM
+alias kvmmembal='virsh memtune'                           # Tune memory allocation (ballooning)
+
+# Disk and Storage Management
+alias kvmdiskls='virsh vol-list --pool default'           # List all volumes in the default pool
+alias kvmdiskinfo='virsh vol-info'                        # Get info about a specific disk volume
+alias kvmdiskresize='virsh vol-resize'                    # Resize a disk volume
+alias kvmstoradd='virsh pool-create-as'                   # Create a new storage pool
+alias kvmstorlist='virsh pool-list'                       # List all storage pools
+alias kvmstorinfo='virsh pool-info'                       # Show info for a specific storage pool
+
+# Network Management
+alias kvmnetls='virsh net-list --all'                     # List all networks
+alias kvmnetstart='virsh net-start'                       # Start a virtual network
+alias kvmnetstop='virsh net-destroy'                      # Stop a virtual network
+alias kvmnetinfo='virsh net-info'                         # Show details of a virtual network
+alias kvmnetedit='virsh net-edit'                         # Edit a virtual network configuration
+
+# File and ISO Management
+alias kvmpoolls='virsh pool-list --all'                   # List all storage pools
+alias kvmvolcreate='virsh vol-create-as'                  # Create a new volume in a storage pool
+alias kvmvoldelete='virsh vol-delete'                     # Delete a volume from a storage pool
+alias kvmiso='ls /var/lib/libvirt/images/*.iso'           # List ISOs in default images folder
+
+# VM Console and Display
+alias kvmconsole='virsh console'                          # Connect to a VM console
+alias kvmspice='virt-viewer --connect qemu:///system'     # Connect to VM with SPICE viewer
+alias kvmgui='virt-manager'                               # Open Virt-Manager GUI
+
+# VM Backup and Export
+alias kvmexport='virsh dump --memory-only'                # Dump the VM state to a file (live backup)
+alias kvmexportimg='virsh dumpxml >'                      # Export VM XML config for backup
+alias kvmimport='virsh define'                            # Import VM XML config
+
+# VM Migration
+alias kvmmigrate='virsh migrate --live'                   # Live migrate a VM to another host
+alias kvmmigstat='virsh migrate-setspeed'                 # Set migration bandwidth limit
+
+# Host Management and Hypervisor Info
+alias kvmhostinfo='virsh nodeinfo'                        # Show host node information
+alias kvmcpustats='virsh cpu-stats'                       # Show CPU statistics for VMs
+alias kvmmemstats='virsh dommemstat'                      # Show memory statistics for VMs
+alias kvmlog='journalctl -u libvirtd -f'                  # Follow libvirt logs
+
+# Troubleshooting and Recovery
+alias kvmrestorexml='virsh define'                        # Redefine a VM from an XML file
+alias kvmresetnet='virsh net-undefine'                    # Reset a virtual network
+alias kvmlogin='sudo virsh'                               # Login to virsh shell as superuser
+
+# Help and Documentation
+alias kvmhelp='man virsh'                                 # Show the virsh manual
+alias kvminfoall='virsh list --all; virsh pool-list --all; virsh net-list --all' # Summary info
