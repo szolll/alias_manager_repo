@@ -1,0 +1,102 @@
+# Basic Ansible Commands
+alias av='ansible --version'                           # Check Ansible version
+alias ap='ansible-playbook'                            # Run a playbook
+alias acheck='ansible-playbook --syntax-check'         # Syntax check for playbooks
+alias adry='ansible-playbook --check'                  # Run in check mode (dry-run)
+alias aver='ansible-playbook -vvvv'                    # Run with maximum verbosity
+alias acollect='ansible-config dump'                   # Show config dump
+alias aconf='ansible-config view'                      # View Ansible config
+
+# Inventory and Config Management
+alias ainv='ansible-inventory --list -y'               # Display inventory in YAML
+alias ainvls='ansible-inventory --graph'               # Graphical view of inventory
+alias ainvcf='ansible-inventory -i'                    # Specify custom inventory file
+
+# Ad-Hoc Commands (General)
+alias aping='ansible all -m ping'                      # Ping all hosts in inventory
+alias ascript='ansible all -m script -a'               # Run a local script on all hosts
+alias acmd='ansible all -m command -a'                 # Run a shell command on all hosts
+alias ashell='ansible all -m shell -a'                 # Run a shell command with shell module
+
+# User and Group Management
+alias ausers='ansible all -m user'                     # Manage users on all hosts
+alias agrp='ansible all -m group'                      # Manage groups on all hosts
+
+# Service and Process Management
+alias asvc='ansible all -m service -a'                 # Manage services
+alias asysctl='ansible all -m sysctl -a'               # Manage sysctl parameters
+alias aprocess='ansible all -m command -a "ps aux | grep"' # Check running processes
+
+# File and Directory Management
+alias acopy='ansible all -m copy -a'                   # Copy files to remote hosts
+alias afile='ansible all -m file -a'                   # Manage files and directories
+alias aget='ansible all -m fetch -a'                   # Fetch files from remote hosts
+alias aarchive='ansible all -m archive -a'             # Archive files
+alias aextract='ansible all -m unarchive -a'           # Unarchive files
+
+# Package Management
+alias apkg='ansible all -m apt -a'                     # Run apt module on all hosts
+alias ayum='ansible all -m yum -a'                     # Run yum module on Red Hat-based systems
+alias apacman='ansible all -m pacman -a'               # Run pacman on Arch-based systems
+alias asnap='ansible all -m snap -a'                   # Run snap on Ubuntu systems
+
+# Network Management
+alias anet='ansible all -m nmcli -a'                   # Manage network settings with nmcli
+alias aifconfig='ansible all -m command -a "ifconfig"' # Run ifconfig command on all hosts
+alias apingtest='ansible all -m command -a "ping -c 4"' # Test network connectivity with ping
+
+# System Reboot and Shutdown
+alias ashutdown='ansible all -m command -a "shutdown now"'  # Shutdown all hosts
+alias areboot='ansible all -m reboot'                       # Reboot all hosts
+
+# Disk and Filesystem Management
+alias adf='ansible all -m command -a "df -h"'           # Check disk usage on all hosts
+alias afdisk='ansible all -m command -a "fdisk -l"'     # List all partitions
+alias afdiskmgmt='ansible all -m lvol'                  # Logical volume management
+
+# Facts and Debugging
+alias afacts='ansible all -m setup'                     # Gather facts from all hosts
+alias adbg='ansible all -m debug -a'                    # Run debug module on all hosts
+alias afact='ansible all -m setup -a'                   # Show specific facts for all hosts
+
+# Vault Management
+alias avault='ansible-vault'                            # Base command for Ansible Vault
+alias avedit='ansible-vault edit'                       # Edit an encrypted file
+alias avencrypt='ansible-vault encrypt'                 # Encrypt a file
+alias avdecrypt='ansible-vault decrypt'                 # Decrypt a file
+
+# Git Operations with Ansible
+alias agitpull='ansible all -m git -a "repo=<repo_url> dest=<destination>"'  # Pull Git repo
+alias agitclone='ansible all -m git -a "repo=<repo_url> dest=<destination> version=<branch>"' # Clone repo
+
+# Docker and Containers (with ansible.builtin.docker module if available)
+alias adocker='ansible all -m docker_container'         # Manage Docker containers
+alias adockerps='ansible all -m docker_container -a "name=<container_name> state=started"' # Start container
+alias adockerstop='ansible all -m docker_container -a "name=<container_name> state=stopped"' # Stop container
+
+# Kubernetes (with community.kubernetes module if available)
+alias ak8s='ansible all -m kubernetes'                  # Kubernetes management
+alias ak8spod='ansible all -m kubernetes -a "namespace=default kind=Pod"'
+
+# Run Specific Playbooks Quickly
+alias adeploy='ansible-playbook deploy.yml'             # Shortcut for a deploy playbook
+alias aupdate='ansible-playbook update.yml'             # Shortcut for an update playbook
+alias aconfig='ansible-playbook config.yml'             # Shortcut for a config playbook
+alias apatch='ansible-playbook patch.yml'               # Run a patching playbook
+
+# Custom Environment Setup
+alias asetup='ansible-playbook setup_environment.yml'   # Setup environment
+alias aprovision='ansible-playbook provision.yml'       # Provision hosts with playbook
+
+# Miscellaneous Aliases
+alias afping='ansible -m ping --forks 10'               # Ping hosts with parallelism
+alias atime='ansible all -m command -a "date"'          # Check date and time on all hosts
+alias auname='ansible all -m command -a "uname -a"'     # Get system information
+alias auptime='ansible all -m command -a "uptime"'      # Check uptime on all hosts
+alias amem='ansible all -m command -a "free -m"'        # Check memory usage
+alias aswap='ansible all -m command -a "swapon -s"'     # Check swap usage
+
+# General Help
+alias ahlp='ansible-doc -l'                             # List available modules
+alias amod='ansible-doc'                                # Show documentation for a module
+alias aex='ansible-examples'                            # Show Ansible examples (if configured)
