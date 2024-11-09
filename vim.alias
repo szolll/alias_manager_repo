@@ -1,0 +1,116 @@
+# Open Vim with shortcuts
+alias vi='vim'
+alias svi='sudo vim'
+alias vimrc='vim ~/.vimrc'
+
+# File Navigation
+alias ve='vim +Explore'        # Open Vim in file explorer mode
+alias vf='vim `fzf`'           # Open Vim with file selected via fzf (if installed)
+
+# Editing and Saving
+alias wq=':wq'                 # Write and quit
+alias q=':q'                   # Quit
+alias qa=':qa'                 # Quit all
+alias w=':w'                   # Write file
+alias wa=':wa'                 # Write all files
+
+# Search and Replace
+alias vsearch='vim +"set hlsearch"'  # Open Vim with highlight search enabled
+alias vre=':%s/'                    # Start a global replace
+
+# Buffer and Window Management
+alias bn=':bn'                      # Go to the next buffer
+alias bp=':bp'                      # Go to the previous buffer
+alias bd=':bd'                      # Delete current buffer
+alias sp=':split'                   # Horizontal split
+alias vs=':vsplit'                  # Vertical split
+
+# Working with Tabs
+alias tn=':tabnew'                  # Open a new tab
+alias tc=':tabclose'                # Close the current tab
+alias to=':tabonly'                 # Close all other tabs
+alias tm=':tabmove'                 # Move tab
+
+# Visual Mode Helpers
+alias vis=':set nu'                 # Enable line numbers
+alias novis=':set nonu'             # Disable line numbers
+
+# Plugin Management (for Vundle, if installed)
+alias viup='vim +PluginInstall +qall'   # Install plugins with Vundle
+alias viupd='vim +PluginUpdate +qall'   # Update plugins with Vundle
+alias vicl='vim +PluginClean +qall'     # Clean unused plugins with Vundle
+
+# Code Formatting (requires external tools like prettier, etc.)
+alias vfmt=':%!prettier --stdin-filepath %'  # Format file with prettier (if installed)
+alias vsh=':%!shfmt'                         # Format shell scripts (requires shfmt)
+
+# Opening Specific Configurations and Common Files
+alias vimrc='vim ~/.vimrc'                     # Edit Vim config
+alias vimbash='vim ~/.bashrc'                  # Edit Bash config
+alias vimzsh='vim ~/.zshrc'                    # Edit Zsh config
+alias vimhosts='sudo vim /etc/hosts'           # Edit hosts file with sudo
+
+# Searching and Navigation
+alias vg=':vimgrep'                            # Start a search with :vimgrep
+alias vnext=':cn'                              # Jump to next search result
+alias vprev=':cp'                              # Jump to previous search result
+alias vl=':lopen'                              # Open the location list
+alias vcl=':cclose'                            # Close the quickfix list
+
+# Tabs and Windows Management
+alias tat=':tabnew %'                          # Open current file in a new tab
+alias ts=':tab split'                          # Open split in new tab
+alias tw=':tabonly | qall'                     # Keep only current tab, close others
+
+# Registers and Marks
+alias vregs=':registers'                       # Show registers
+alias marks=':marks'                           # Show marks
+
+# Code Folding and Syntax Highlighting
+alias vsyn=':syntax on'                        # Enable syntax highlighting
+alias vn=':set nu'                             # Show line numbers
+alias vf=':set foldmethod=indent'              # Set fold by indent
+alias voff=':set nofoldenable'                 # Disable folding
+
+# Working with Buffers
+alias vbuf=':ls'                               # List all buffers
+alias vbun=':bunload'                          # Unload buffer
+alias bv=':bprevious'                          # Previous buffer
+alias bn=':bnext'                              # Next buffer
+alias bb=':buffer #'                           # Switch to alternate buffer
+
+# Formatting and Indentation
+alias vimfmt=':normal gg=G'                    # Re-indent entire file
+alias viw=':set wrap'                          # Enable word wrap
+alias viwn=':set nowrap'                       # Disable word wrap
+
+# Macros and Recording
+alias vrec=':q'                                # Start recording macro to register 'q'
+alias vstop=':q'                               # Stop recording
+alias vplay='@q'                               # Play macro in register 'q'
+
+# External Commands
+alias vps=':%!python3'                         # Run current buffer through Python
+alias vshfmt=':%!shfmt'                        # Format shell scripts (requires shfmt)
+alias vjsonfmt=':%!jq .'                       # Format JSON (requires jq)
+alias vsqlfmt=':%!sqlformat -r -k upper'       # Format SQL (requires sqlformat)
+
+# Spell Checking
+alias vspell=':set spell'                      # Enable spell checking
+alias vnospell=':set nospell'                  # Disable spell checking
+alias vsuggest='z='                            # Show spelling suggestions
+
+# Toggle Settings
+alias invlist=':set list!'                     # Toggle list mode (show whitespace)
+alias invpaste=':set paste!'                   # Toggle paste mode (for copying)
+
+# Basic Git Aliases (for vim-fugitive plugin, if installed)
+alias vgs=':Git status'                        # Git status in Vim
+alias vgco=':Git checkout'                     # Git checkout in Vim
+alias vglog=':Gclog'                           # Git log in Vim
+alias vgblame=':Gblame'                        # Git blame in Vim
+
+# General Help and Documentation
+alias helptags=':helptags ~/.vim/doc'          # Generate helptags for plugins
+alias helptoc=':TOC'                           # Generate a table of contents in Vim
+alias helptip=':h tips'                        # Open Vim tips in help
