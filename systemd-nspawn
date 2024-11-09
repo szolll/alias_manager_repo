@@ -1,0 +1,50 @@
+# Basic Container Management
+alias ns='sudo systemd-nspawn'                        # Run systemd-nspawn with sudo
+alias nsls='machinectl list'                          # List all containers
+alias nsstart='sudo systemctl start systemd-nspawn@'  # Start a container
+alias nsstop='sudo systemctl stop systemd-nspawn@'    # Stop a container
+alias nsrestart='sudo systemctl restart systemd-nspawn@' # Restart a container
+
+# Enter and Attach to Containers
+alias nsshell='sudo machinectl shell'                 # Attach a shell to a running container
+alias nslogin='sudo machinectl login'                 # Login to a container interactively
+alias nsrun='sudo systemd-nspawn -M'                  # Run a command in a specified container
+
+# Container Creation and Cloning
+alias nscreate='sudo debootstrap'                     # Create a Debian-based container
+alias nsclone='sudo machinectl clone'                 # Clone an existing container
+alias nsimage='sudo machinectl pull-tar'              # Import an image as a container
+
+# Networking and Host Management
+alias nsnetwork='sudo systemd-nspawn --network-veth'  # Start a container with virtual Ethernet
+alias nsbridge='sudo systemd-nspawn --network-bridge=' # Bridge the container network to host network
+alias nshost='sudo systemd-nspawn --bind='            # Bind a host directory into the container
+
+# Container Snapshot and Rollback
+alias nssnapshot='sudo machinectl snapshot'           # Take a snapshot of a container
+alias nsrollback='sudo machinectl rollback'           # Rollback a container to the last snapshot
+
+# Resource Limiting
+alias nslimitcpu='sudo systemd-nspawn --property=CPUQuota=' # Limit CPU usage for the container
+alias nslimitmem='sudo systemd-nspawn --property=MemoryMax=' # Limit memory usage for the container
+
+# Viewing Container Logs
+alias nslog='sudo journalctl -M'                      # View logs for a specific container
+
+# Mounting and Filesystem Management
+alias nsmount='sudo systemd-nspawn --bind-ro='        # Mount directories as read-only in container
+alias nsrw='sudo systemd-nspawn --bind='              # Mount directories with read-write access
+
+# Lifecycle Management
+alias nsenable='sudo systemctl enable systemd-nspawn@' # Enable a container to start at boot
+alias nsdisable='sudo systemctl disable systemd-nspawn@' # Disable a container from starting at boot
+
+# Running System Commands in Container
+alias nsexec='sudo systemd-nspawn -M <container_name> -D <path> --' # Execute a command in the container
+alias nsupdate='sudo systemd-nspawn -M <container_name> -- apt update && apt upgrade -y' # Update container OS
+
+# Container Cleanup
+alias nsclean='sudo machinectl remove'                # Remove an existing container
+
+# Documentation and Help
+alias nshelp='man systemd-nspawn'                     # Show systemd-nspawn manual
