@@ -1,0 +1,75 @@
+# Apache Service Management
+alias apache_start='sudo systemctl start apache2'                      # Start Apache service
+alias apache_stop='sudo systemctl stop apache2'                        # Stop Apache service
+alias apache_restart='sudo systemctl restart apache2'                  # Restart Apache service
+alias apache_reload='sudo systemctl reload apache2'                    # Reload Apache configuration
+alias apache_status='sudo systemctl status apache2'                    # Check Apache service status
+alias apache_enable='sudo systemctl enable apache2'                    # Enable Apache to start on boot
+alias apache_disable='sudo systemctl disable apache2'                  # Disable Apache from starting on boot
+
+# Apache Configuration Management
+alias apache_conf='sudo nano /etc/apache2/apache2.conf'                # Edit Apache main configuration file
+alias apache_vhosts='sudo nano /etc/apache2/sites-available/000-default.conf' # Edit default virtual host
+alias apache_testconf='sudo apachectl configtest'                      # Test Apache configuration for syntax errors
+alias apache_restart_safely='apachectl graceful'                       # Restart Apache gracefully without dropping connections
+
+# Virtual Host Management
+alias apache_vhost_create='sudo cp /etc/apache2/sites-available/000-default.conf /etc/apache2/sites-available/<your-domain>.conf && sudo nano /etc/apache2/sites-available/<your-domain>.conf' # Create and edit a new virtual host
+alias apache_vhost_enable='sudo a2ensite'                              # Enable a virtual host
+alias apache_vhost_disable='sudo a2dissite'                            # Disable a virtual host
+alias apache_reload_vhosts='sudo systemctl reload apache2'             # Reload Apache to apply virtual host changes
+
+# Module Management
+alias apache_mod_enable='sudo a2enmod'                                 # Enable an Apache module
+alias apache_mod_disable='sudo a2dismod'                               # Disable an Apache module
+alias apache_mod_list='apachectl -M'                                   # List all enabled modules
+alias apache_ssl_enable='sudo a2enmod ssl && sudo systemctl restart apache2' # Enable SSL module and restart Apache
+
+# Enabling and Managing SSL
+alias apache_sslconf='sudo nano /etc/apache2/sites-available/default-ssl.conf' # Edit SSL configuration
+alias apache_ssl_enable_site='sudo a2ensite default-ssl && sudo systemctl reload apache2' # Enable SSL site
+
+# Security and Performance Tuning
+alias apache_htaccess='sudo nano /var/www/html/.htaccess'              # Edit .htaccess in the default web root
+alias apache_htpasswd='sudo htpasswd -c /etc/apache2/.htpasswd <user>' # Create password file for basic auth
+alias apache_deflate_enable='sudo a2enmod deflate && sudo systemctl restart apache2' # Enable gzip compression
+alias apache_headers_enable='sudo a2enmod headers && sudo systemctl restart apache2' # Enable headers module
+alias apache_prefork_enable='sudo a2enmod mpm_prefork && sudo systemctl restart apache2' # Enable prefork MPM for compatibility with PHP
+alias apache_worker_enable='sudo a2enmod mpm_worker && sudo systemctl restart apache2' # Enable worker MPM for performance
+
+# Logs and Monitoring
+alias apache_log='sudo tail -f /var/log/apache2/access.log'            # Tail access log
+alias apache_errorlog='sudo tail -f /var/log/apache2/error.log'        # Tail error log
+alias apache_combinedlog='sudo tail -f /var/log/apache2/other_vhosts_access.log' # Tail combined log for all virtual hosts
+alias apache_logrotate='sudo logrotate /etc/logrotate.d/apache2'       # Manually rotate Apache logs
+
+# Custom Log Management
+alias apache_log_config='sudo nano /etc/apache2/conf-available/other-vhosts-access-log.conf' # Edit custom log configuration
+alias apache_log_enable='sudo a2enconf other-vhosts-access-log && sudo systemctl reload apache2' # Enable custom logging configuration
+
+# Security and Hardening
+alias apache_security_conf='sudo nano /etc/apache2/conf-available/security.conf' # Edit Apache security configuration
+alias apache_limitreq='sudo nano /etc/apache2/mods-available/reqtimeout.conf' # Configure request timeout limits
+alias apache_disable_dirlist='sudo nano /etc/apache2/apache2.conf && sudo systemctl restart apache2' # Disable directory listing globally
+
+# Directory Indexes and Aliases
+alias apache_disable_indexes='sudo sed -i "s/Options Indexes/Options -Indexes/g" /etc/apache2/apache2.conf && sudo systemctl reload apache2' # Disable directory indexes globally
+alias apache_add_alias='sudo nano /etc/apache2/sites-available/000-default.conf' # Edit default virtual host to add an alias
+
+# Website Maintenance
+alias apache_maintenance_on='sudo mv /var/www/html/index.html /var/www/html/index.backup.html && echo "Maintenance Mode" | sudo tee /var/www/html/index.html' # Enable maintenance mode
+alias apache_maintenance_off='sudo mv /var/www/html/index.backup.html /var/www/html/index.html' # Disable maintenance mode
+
+# PHP Integration and Settings (for PHP-enabled Apache)
+alias apache_phpconf='sudo nano /etc/php/<version>/apache2/php.ini'    # Edit PHP configuration for Apache
+alias apache_phperrors='sudo nano /etc/php/<version>/apache2/php.ini'  # Enable or disable PHP error reporting
+alias apache_phpmod_enable='sudo a2enmod php<version> && sudo systemctl restart apache2' # Enable PHP module
+
+# Apache Benchmarking and Testing
+alias apache_bench='ab -n 100 -c 10 http://localhost/'                 # Run Apache Bench to test performance
+alias apache_loadtest='sudo siege -c10 -t30S http://localhost/'        # Load test using siege (install siege first)
+
+# Help and Documentation
+alias apache_help='man apache2'                                        # Show Apache manual
+alias apache_doc='xdg-open https://httpd.apache.org/docs/'             # Open Apache online documentation
+alias apache_tut='xdg-open https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04' # Basic Apache setup tutorial
