@@ -1,0 +1,73 @@
+# Basic Proxmox Commands
+alias pveup='sudo pveupdate'                               # Update Proxmox package index
+alias pveug='sudo pveupgrade'                              # Upgrade Proxmox packages
+alias pvesh='pvesh'                                        # Proxmox Shell
+alias pvever='pveversion'                                  # Display Proxmox version info
+
+# VM Management
+alias pvevmls='qm list'                                    # List all VMs
+alias pvevminfo='qm status'                                # Show status of a specific VM
+alias pvestart='qm start'                                  # Start a VM
+alias pvestop='qm stop'                                    # Stop a VM
+alias pvereboot='qm reboot'                                # Reboot a VM
+alias pvesuspend='qm suspend'                              # Suspend a VM
+alias pveresume='qm resume'                                # Resume a VM
+alias pverm='qm destroy'                                   # Delete a VM
+
+# VM Configuration and Templates
+alias pveclone='qm clone'                                  # Clone a VM or template
+alias pvemk='qm create'                                    # Create a new VM
+alias pvetmpl='qm template'                                # Convert a VM to a template
+alias pveconfig='qm config'                                # Show VM configuration
+alias pveset='qm set'                                      # Modify VM configuration
+
+# Snapshot and Backup Management
+alias pvesnap='qm snapshot'                                # Take a snapshot of a VM
+alias pvesnapls='qm listsnapshots'                         # List all snapshots for a VM
+alias pverollback='qm rollback'                            # Rollback a VM to a snapshot
+alias pvebackup='vzdump'                                   # Backup a VM
+alias pverestore='qmrestore'                               # Restore a VM from backup
+
+# LXC Container Management
+alias pvels='pct list'                                     # List all containers
+alias pvestartct='pct start'                               # Start a container
+alias pvestopct='pct stop'                                 # Stop a container
+alias pvesuspendct='pct suspend'                           # Suspend a container
+alias pveresumect='pct resume'                             # Resume a container
+alias pvesnapshotct='pct snapshot'                         # Snapshot a container
+alias pverollbackct='pct rollback'                         # Rollback a container to a snapshot
+alias pveclonect='pct clone'                               # Clone a container
+alias pvemkct='pct create'                                 # Create a new container
+
+# Storage Management
+alias pvestorls='pvesm status'                             # List storage status
+alias pvestoradd='pvesm add'                               # Add new storage
+alias pvestorrm='pvesm remove'                             # Remove storage
+alias pvestorinfo='pvesm status <storage_id>'              # Show info about specific storage
+
+# Network Management
+alias pvens='ip -c a'                                      # List network interfaces on Proxmox
+alias pvensconfig='nano /etc/network/interfaces'           # Edit network configuration
+alias pverestartnet='systemctl restart networking'         # Restart networking service
+alias pvebradd='pvesh create /nodes/<node>/network/<bridge>' # Add a bridge network interface
+
+# Node Management
+alias pvenodels='pvecm nodes'                              # List nodes in the cluster
+alias pvenodeadd='pvecm add'                               # Add a new node to the cluster
+alias pvenodeinfo='pvecm status'                           # Display cluster status
+alias pvermnode='pvecm delnode'                            # Remove a node from the cluster
+
+# Cluster and High Availability (HA) Management
+alias pvehaenable='pvecm enable'                           # Enable HA for a node
+alias pvehastart='ha-manager start'                        # Start HA manager
+alias pvehastop='ha-manager stop'                          # Stop HA manager
+alias pvehals='ha-manager status'                          # List HA status for all nodes
+
+# Task Management and Logs
+alias pvetaskls='pvesh get /cluster/tasks'                 # List recent tasks
+alias pvetasklog='pve tail /var/log/pve/tasks'             # Tail Proxmox task log
+alias pvelog='journalctl -u pvedaemon -f'                  # Follow Proxmox log
+
+# Documentation and Help
+alias pvehelp='pvesh help'                                 # Show Proxmox command help
+alias pvewiki='xdg-open https://pve.proxmox.com/wiki/Main_Page' # Open Proxmox Wiki
