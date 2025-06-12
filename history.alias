@@ -1,0 +1,1 @@
+alias hist='HISTTIMEFORMAT="%F %T " history'
